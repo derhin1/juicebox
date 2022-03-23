@@ -128,31 +128,12 @@ async function createTables() {
   }
 }
 
-// async function createPostsTable() {
-//   try {
-//     console.log("Starting to create the posts table");
-//     await client.query(`
-//             CREATE TABLE posts(
-//                 id SERIAL PRIMARY KEY,
-//                 "authorId" INTEGER REFERENCES users(id) NOT NULL,
-//                 title varchar(255) NOT NULL,
-//                 content text NOT NULL,
-//                 active boolean DEFAULT true
-//             );
-//         `);
-//     console.log("Finished creating the posts table");
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
 async function rebuildDB() {
   try {
     client.connect();
     await dropTables();
     await createTables();
     await createInitialUsers();
-    // await createPostsTable();
   } catch (error) {
     console.error(error);
   }
